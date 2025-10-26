@@ -11,8 +11,8 @@ class Tweet {
     get source():string 
     {
         var tweet:string = this.text.toLowerCase(); //for case matching
-        console.log(tweet);
 
+        //On a side note: Go update this later so it doesn't take up as much space
         //For live_events:
         if(tweet.startsWith("watch") || tweet.includes("watch") || tweet.endsWith("watch"))
         {
@@ -66,42 +66,125 @@ class Tweet {
     {
         //TODO: identify whether the tweet is written
         //the parsing consists basically of "Just completed blah blah" exclude everything after @ RunKeeper
+        var httpsIndex = this.text.indexOf("https://"); 
+        var tweet = this.text.substring(0, httpsIndex); 
+        var userIndex = tweet.indexOf(" - "); 
+
+        if(userIndex != -1)
+        {
+            return true;
+        }
         return false;
     }
 
-    get writtenText():string {
-        if(!this.written) {
+    get writtenText():string 
+    {
+        if(!this.written) 
+        {
             return "";
-        }
-        //TODO: parse the written text from the tweet
-        return "";
-    }
-
-    get activityType():string {
-        if (this.source == 'completed_event') 
-        {
-            return "completed_event";
-        }
-        else if(this.source == 'live_event')
-        {
-            return "live_event";
-        }
-        else if(this.source == 'achievement')
-        {
-            return "achievement";
         }
         else
         {
-            return ""; 
+            var httpsIndex:number = this.text.indexOf("https://")
+            var dash:number = this.text.indexOf(" - ");
+            return this.text.substring(dash+1, httpsIndex);
         }
     }
 
-    get distance():number {
-        if(this.source != 'completed_event') {
+    get activityType():string 
+    {
+        if (this.source != 'completed_event') 
+        {
+            return "";
+        }
+        else
+        {
+            var tweet:string = this.text.toLowerCase(); //for case matching
+            var indexOfRunkeeper = tweet.indexOf("runkeeper");
+            tweet = tweet.substring(0, indexOfRunkeeper);
+            
+            if(tweet.includes("run"))
+            {
+                return "running"; 
+            }
+
+            if(tweet.includes("bike"))
+            {
+                return "biking"; 
+            }
+
+            if(tweet.includes("walk"))
+            {
+                return "walking";
+            }
+
+            if(tweet.includes("swim"))
+            {
+                return "swimming"; 
+            }
+
+            if(tweet.includes("hike"))
+            {
+                return "hiking";
+            }
+
+            return "workout";
+        }
+    }
+
+    get distance():number 
+    {
+        if(this.source != 'completed_event') 
+        {
             return 0;
         }
-        //TODO: prase the distance from the text of the tweet
-        return 0;
+        
+        var indexStart = this.text.indexOf("Just completed a ");
+        if(indexStart == -1)
+        {
+            indexStart = this.text.indexOf("Just posted a ");
+            if(indexStart == -1)
+            {
+                return 0; 
+            }
+        }
+
+        var distance:number = 0;
+
+        var distNum:string = this.text.substring(indexStart); 
+        
+        var distUnit:string = ""; 
+
+        if(distNum.includes("mi"))
+        {
+            distUnit = "mi";
+        }
+        else if(distNum.includes("km"))
+        {
+            distUnit = "km";
+        }
+        else
+        {
+            return 0; 
+        }
+
+        distNum = distNum.substring(0, distNum.indexOf(distUnit));
+
+        if(isNaN(Number(distNum)))
+        {
+            return 0;
+        }
+        else
+        {
+            distance = Number(distNum);
+            if(distUnit == "km")
+            {
+                distance = distance / 1.069;
+            }
+            console.log(distance);
+            return distance; 
+        }
+        
     }
 
     getHTMLTableRow(rowNumber:number):string {
