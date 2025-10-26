@@ -12,7 +12,12 @@
 
 
 3. What online resources did you consult when completing this assignment? (list sites like StackOverflow or specific URLs for tutorials; describe queries to Generative AI or use of AI-based code completion)
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
 
+    https://www.w3schools.com/js/js_variables.asp
+    https://www.geeksforgeeks.org/javascript/how-to-sort-a-map-in-javascript/#approach-1-using-mapentries-and-sort-method
+    https://www.geeksforgeeks.org/javascript/sort-an-object-array-by-date-in-javascript/
+    https://www.w3schools.com/js/js_loop_for.asp 
 
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
