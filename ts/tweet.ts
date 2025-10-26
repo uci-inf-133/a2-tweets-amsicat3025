@@ -12,7 +12,7 @@ class Tweet {
     {
         var tweet:string = this.text.toLowerCase(); //for case matching
         console.log(tweet);
-        
+
         //For live_events:
         if(tweet.startsWith("watch") || tweet.includes("watch") || tweet.endsWith("watch"))
         {
@@ -62,8 +62,10 @@ class Tweet {
     }
 
     //returns a boolean, whether the text includes any content written by the person tweeting.
-    get written():boolean {
+    get written():boolean 
+    {
         //TODO: identify whether the tweet is written
+        //the parsing consists basically of "Just completed blah blah" exclude everything after @ RunKeeper
         return false;
     }
 
@@ -76,11 +78,22 @@ class Tweet {
     }
 
     get activityType():string {
-        if (this.source != 'completed_event') {
-            return "unknown";
+        if (this.source == 'completed_event') 
+        {
+            return "completed_event";
         }
-        //TODO: parse the activity type from the text of the tweet
-        return "";
+        else if(this.source == 'live_event')
+        {
+            return "live_event";
+        }
+        else if(this.source == 'achievement')
+        {
+            return "achievement";
+        }
+        else
+        {
+            return ""; 
+        }
     }
 
     get distance():number {

@@ -59,16 +59,16 @@ function calculateCategoryType(tweet_array)
 	for(let i = 0; i < len; i++)
 	{
 		let cur_tweet = tweet_array[i]; 
-		let category = cur_tweet.source; 
-		if(category == "live_event")
+		let actType = cur_tweet.activityType; 
+		if(actType == "live_event")
 		{
 			live_events += 1; 
 		}
-		else if(category == "achievement")
+		else if(actType == "achievement")
 		{
 			achievement += 1; 
 		}
-		else if(category == "completed_event")
+		else if(actType == "completed_event")
 		{
 			completed_event += 1; 
 		}
@@ -78,6 +78,7 @@ function calculateCategoryType(tweet_array)
 		}
 	}
 
+	//Important note to self: Figure out if there's a better way to deal with changing the text here
 	let pctComplete = math.format((completed_event / len), { notation: "fixed", precision: 2}); 
 	document.getElementsByClassName("completedEvents")[0].innerText = completed_event; 
 	document.getElementsByClassName("completedEventsPct")[0].innerText = pctComplete + "%"; 
