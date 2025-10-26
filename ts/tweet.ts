@@ -8,9 +8,57 @@ class Tweet {
 	}
 
 	//returns either 'live_event', 'achievement', 'completed_event', or 'miscellaneous'
-    get source():string {
+    get source():string 
+    {
+        var tweet:string = this.text.toLowerCase(); //for case matching
+        console.log(tweet);
+        
+        //For live_events:
+        if(tweet.startsWith("watch") || tweet.includes("watch") || tweet.endsWith("watch"))
+        {
+            return "live_event"; 
+        }
+
+        if(tweet.startsWith("now") || tweet.includes("now") || tweet.endsWith("now"))
+        {
+            return "live_event"; 
+        }
+        
+        if(tweet.startsWith("live") || tweet.includes("live") || tweet.endsWith("live"))
+        {
+            return "live_event"; 
+        }
+
+        //For achievement:
+        if(tweet.startsWith("achieve") || tweet.includes("achieve") || tweet.endsWith("achieve"))
+        {
+            return "achievement"; 
+        }
+
+        if(tweet.startsWith("record") || tweet.includes("record") || tweet.endsWith("record"))
+        {
+            return "achievement"; 
+        }
+
+        if(tweet.startsWith("goal") || tweet.includes("goal") || tweet.endsWith("goal"))
+        {
+            return "achievement"; 
+        }
+
+        //For completed_events: 
+        if(tweet.startsWith("completed") || tweet.includes("completed") || tweet.endsWith("completed"))
+        {
+            return "completed_event"; 
+        }
+
+        if(tweet.startsWith("posted") || tweet.includes("posted") || tweet.endsWith("posted"))
+        {
+            return "completed_event"; 
+        }
+
+       
         //TODO: identify whether the source is a live event, an achievement, a completed event, or miscellaneous.
-        return "unknown";
+        return "miscellaneous";
     }
 
     //returns a boolean, whether the text includes any content written by the person tweeting.
