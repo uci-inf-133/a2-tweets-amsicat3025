@@ -60,16 +60,16 @@ function calculateCategoryType(tweet_array)
 	for(let i = 0; i < len; i++)
 	{
 		let cur_tweet = tweet_array[i]; 
-		let actType = cur_tweet.activityType; 
-		if(actType == "live_event")
+		let source = cur_tweet.source; 
+		if(source == "live_event")
 		{
 			live_events += 1; 
 		}
-		else if(actType == "achievement")
+		else if(source == "achievement")
 		{
 			achievement += 1; 
 		}
-		else if(actType == "completed_event")
+		else if(source == "completed_event")
 		{
 			completed_event += 1; 
 		}
