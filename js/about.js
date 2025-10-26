@@ -14,6 +14,7 @@ function parseTweets(runkeeper_tweets) {
 	document.getElementById('numberTweets').innerText = tweet_array.length;	
 	updateTimes(tweet_array);
 	calculateCategoryType(tweet_array);
+	obtainWritten(tweet_array);
 }
 
 //Wait for the DOM to load
@@ -80,6 +81,12 @@ function calculateCategoryType(tweet_array)
 
 	//Important note to self: Figure out if there's a better way to deal with changing the text here
 	let pctComplete = math.format((completed_event / len), { notation: "fixed", precision: 2}); 
+	const completedEvents = document.getElementsByClassName('completedEvents');
+	let comLen = completedEvents.length; 
+	for(let i = 0; i < comLen; i++)
+	{
+		completedEvents[i].innerText = completed_event;
+	}
 	document.getElementsByClassName("completedEvents")[0].innerText = completed_event; 
 	document.getElementsByClassName("completedEventsPct")[0].innerText = pctComplete + "%"; 
 
@@ -95,4 +102,22 @@ function calculateCategoryType(tweet_array)
 	document.getElementsByClassName("miscellaneous")[0].innerText = achievement; 
 	document.getElementsByClassName("miscellaneousPct")[0].innerText = pctMisc + "%";
 
+}
+
+function obtainWritten(tweet_array)
+{
+	let len = tweet_array.length;
+	let numWritten = 0; 
+
+	for(let i = 0; i < len; i++)
+	{
+		if(tweet_array[i].written)
+		{
+			numWritten += 1; 
+		}
+	}
+
+	let pctWritten = math.format((numWritten / len),  { notation: "fixed", precision: 2});
+	document.getElementsByClassName("written")[0].innerText = numWritten; 
+	document.getElementsByClassName("writtenPct")[0].innerText = pctWritten + "%";
 }
