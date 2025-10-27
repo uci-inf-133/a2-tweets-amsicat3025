@@ -93,7 +93,7 @@ class Tweet {
 
     get activityType():string 
     {
-        if (this.source != 'completed_event') 
+        if (this.source != "completed_event") 
         {
             return "";
         }
@@ -107,7 +107,7 @@ class Tweet {
             {
                 return "skiing";
             }
-            
+
             if(tweet.includes("run"))
             {
                 return "running"; 
@@ -139,24 +139,32 @@ class Tweet {
 
     get distance():number 
     {
-        if(this.source != 'completed_event') 
+        if(this.source != "completed_event") 
         {
+            //console.log("Not a completed event, do not calculate");
             return 0;
         }
         
-        var indexStart = this.text.indexOf("Just completed a ");
+        var startString = "Just completed a ";
+
+        var indexStart = this.text.indexOf(startString);
         if(indexStart == -1)
         {
-            indexStart = this.text.indexOf("Just posted a ");
+            //console.log("Text does not contain Just completed a ");
+            startString = "Just posted a ";
+            indexStart = this.text.indexOf(startString);
+            //console.log("indexStart: " + indexStart);
             if(indexStart == -1)
             {
+                //console.log("Text does not have any distance measured");
                 return 0; 
             }
         }
 
         var distance:number = 0;
 
-        var distNum:string = this.text.substring(indexStart); 
+        var distNum:string = this.text.substring(indexStart + startString.length); 
+        //console.log("distNum: " + distNum);
         
         var distUnit:string = ""; 
 
@@ -173,7 +181,7 @@ class Tweet {
             return 0; 
         }
 
-        distNum = distNum.substring(0, distNum.indexOf(distUnit));
+        distNum = distNum.substring(0, distNum.indexOf(distUnit)).trim();
 
         if(isNaN(Number(distNum)))
         {

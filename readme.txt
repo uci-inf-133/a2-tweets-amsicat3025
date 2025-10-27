@@ -22,7 +22,8 @@
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getDay
-
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/in
+    
     https://mathjs.org/docs/reference/functions/format.html
 
     https://www.w3schools.com/js/js_variables.asp
@@ -34,6 +35,7 @@
     https://www.w3schools.com/jsref/jsref_includes_array.asp
     https://www.w3schools.com/jsref/jsref_push.asp
     https://www.geeksforgeeks.org/javascript/how-to-iterate-over-map-elements-in-javascript/
+    https://www.w3schools.com/jsref/jsref_slice_array.asp
 
     https://www.geeksforgeeks.org/javascript/how-to-sort-a-map-in-javascript/#approach-1-using-mapentries-and-sort-method
     https://www.geeksforgeeks.org/javascript/sort-an-object-array-by-date-in-javascript/
@@ -43,6 +45,9 @@
     https://stackoverflow.com/questions/65114988/using-in-keyword-with-maps-in-js
 
     https://vega.github.io/vega-lite/examples/bar_size_responsive.html 
+    https://vega.github.io/vega-lite/examples/point_2d.html
+    https://vega.github.io/vega-lite-v1/docs/encoding.html
+    https://vega.github.io/vega-lite/docs/aggregate.html
 
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?

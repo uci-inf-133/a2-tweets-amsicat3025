@@ -7,8 +7,14 @@ function parseTweets(runkeeper_tweets) {
 	
 	tweet_array = runkeeper_tweets.map(function(tweet) {
 		return new Tweet(tweet.text, tweet.created_at);
+		
 	});
-	console.log(tweet_array.length);
+	
+	for(let i = 0; i < tweet_array.length; i++)
+	{
+		console.log(typeof tweet_array[i].distance, tweet_array[i].distance);
+		console.log("Source: " + tweet_array[i].source + ", distance: " + tweet_array[i].distance);
+	}
 	activities = obtainNumActivities(tweet_array);
 	updateActivitiesPage(activities)
 
@@ -26,7 +32,7 @@ function parseTweets(runkeeper_tweets) {
 	  },
 	  "mark": "bar", 
 	  "encoding" : {
-		"x": {"field": "Activity Type"},
+		"x": {"field": "Activity Type", "type": "nominal"},
 		"y": {"field": "frequency", "type": "quantitative", "title": "Number of Tweets"}
 	  }
 	  //TODO: Add mark and encoding
@@ -35,6 +41,26 @@ function parseTweets(runkeeper_tweets) {
 
 	//TODO: create the visualizations which group the three most-tweeted activities by the day of the week.
 	//Use those visualizations to answer the questions about which activities tended to be longest and when.
+
+	let distAct = mostFrequentDayMeans(activities, tweet_array);
+	console.log(distAct);
+
+	distance_vis_spec = {
+	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+	  "width": 600,
+	  "height": 400, 
+	  "description": "Distances by day of the week for the most-tweeted about activities.",
+	  "data": {
+	    "values": distAct
+	  },
+	  "mark": "point", 
+	  "encoding" : {
+		"x": {"field": "Day", "type": "nominal"},
+		"y": {"field": "distance", "type": "quantitative", "title": "distance"},
+		"color": {"field": "Activity", type: "nominal"}
+	  }
+	}
+	vegaEmbed('#distanceVis', distance_vis_spec, {actions:false});
 }
 
 //Wait for the DOM to load
@@ -50,14 +76,14 @@ function obtainNumActivities(tweet_array)
 	for(let i = 0; i < len; i++)
 	{
 		let tweet = tweet_array[i]; 
-		if(tweet.source != "completed_event")
+		if(tweet.source != "completed_event" || isNaN(tweet.distance))
 		{
-			console.log("not a completed event");
+			//console.log("not a completed event");
 			continue; 
 		}
 
-		console.log("is a completed event");
-		console.log(activities);
+		//console.log("is a completed event");
+		//console.log(tweet.distance);
 		let actType = tweet.activityType;
 
 		let day = tweet.time.getDay(); 
@@ -83,31 +109,31 @@ function obtainNumActivities(tweet_array)
 
 		if(day == 0)
 		{
-			activities.get(actType).sunday += 1;
+			activities.get(actType).sunday += tweet.distance;
 		}
 		else if(day == 1)
 		{
-			activities.get(actType).monday += 1;
+			activities.get(actType).monday += tweet.distance;
 		}
 		else if(day == 2)
 		{
-			activities.get(actType).tuesday +=1; 
+			activities.get(actType).tuesday += tweet.distance; 
 		}
 		else if(day == 3)
 		{
-			activities.get(actType).wednesday +=1; 
+			activities.get(actType).wednesday += tweet.distance; 
 		}
 		else if(day == 4)
 		{
-			activities.get(actType).thursday +=1; 
+			activities.get(actType).thursday += tweet.distance; 
 		}
 		else if(day == 5)
 		{
-			activities.get(actType).friday +=1; 
+			activities.get(actType).friday += tweet.distance; 
 		}
 		else
 		{
-			activities.get(actType).saturday +=1; 
+			activities.get(actType).saturday += tweet.distance; 
 		}
 		
 		if(isWeekday)
@@ -180,6 +206,73 @@ function activityFrequencyArray(activities)
 	}
 
 	return actFreq;
+}
+
+function mostFrequentDayMeans(activities, tweet_array)
+{
+	let arr = sortActFrequency(activities); 
+	console.log(arr);
+
+	let mostFreq = new Array();
+
+	for(i = 0; i < 3; i++)
+	{
+		mostFreq.push(arr[i][0]);
+	}
+
+	const len = tweet_array.length; 
+
+	let distanceMeans = new Array(); 
+
+	for(let j = 0; j < len; ++j)
+	{
+		let tweet = tweet_array[j];
+
+		if(!mostFreq.includes(tweet.activityType) || tweet.source != "completed_event")
+		{
+			continue; 
+		}
+
+		console.log("Text: " + tweet.text + "Distance: " + tweet.distance);
+
+		if(tweet.distance == 0 || isNaN(tweet.distance))
+		{
+			continue;
+		}
+
+		let day = tweet.time.getDay(); 
+
+		if(day == 0)
+		{
+			distanceMeans.push({"Day": "Sunday", "Activity": tweet.activityType, "distance": tweet.distance})
+		}
+		else if(day == 1)
+		{
+			distanceMeans.push({"Day": "Monday", "Activity": tweet.activityType, "distance": tweet.distance})
+		}
+		else if(day == 2)
+		{
+			distanceMeans.push({"Day": "Tuesday", "Activity": tweet.activityType, "distance": tweet.distance})
+		}
+		else if(day == 3)
+		{
+			distanceMeans.push({"Day": "Wednesday", "Activity": tweet.activityType, "distance": tweet.distance})
+		}
+		else if(day == 4)
+		{
+			distanceMeans.push({"Day": "Thursday", "Activity": tweet.activityType, "distance": tweet.distance})
+		}
+		else if(day == 5)
+		{
+			distanceMeans.push({"Day": "Friday", "Activity": tweet.activityType, "distance": tweet.distance})
+		}
+		else
+		{
+			distanceMeans.push({"Day": "Saturday", "Activity": tweet.activityType, "distance": tweet.distance})
+		}
+	}
+
+	return distanceMeans;
 }
 
 function sortActMileage(activities)
