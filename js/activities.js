@@ -51,26 +51,29 @@ function obtainNumActivities(tweet_array)
 		let actType = tweet.activityType;
 
 		let isWeekday = true; 
-		if(tweet.time.getDay() == "Saturday" || tweet.time.getDay() == "Sunday")
+		if(tweet.time.getDay() == 0 || tweet.time.getDay() == 6)
 		{
 			isWeekday = false;
 		}
 
 		if(!activities.has(actType))
 		{
-			activities.set(actType, {frequency: 1, mileage: tweet.distance, weekday: 0, weekend: 0});
+			activities.set(actType, {frequency: 1, mileage: tweet.distance, weekday: 0, weekdayMileage: 0, weekend: 0, weekendMileage: 0});
 		}
 		else
 		{
 			activities.get(actType).frequency += 1; 
-			activities.get(actType).mileage += tweet.distance;
+			activities.get(actType).mileage += tweet.distance; 
 		}
+
 		if(isWeekday)
 		{
+			activities.get(actType).weekdayMileage += tweet.distance;
 			activities.get(actType).weekday += 1; 
 		}
 		else
 		{
+			activities.get(actType).weekendMileage += tweet.distance;
 			activities.get(actType).weekend += 1; 
 		}
 	}
@@ -93,10 +96,11 @@ function obtainNumActivities(tweet_array)
 	document.getElementById("longestActivityType").innerText = longest; 
 	document.getElementById("shortestActivityType").innerText = shortest; 
 
-	console.log("Longest weekday: " + longest[1].weekday);
-	console.log("Longest weekend: " + longest[1].weekend);
+	//Longest one is done more on weekends or weekdays
+	let weekdayAvg = mileArray[0][1].weekdayMileage / mileArray[0][1].weekday; 
+	let weekendAvg = mileArray[0][1].weekendMileage / mileArray[0][1].weekend;
 
-	if(longest[1].weekday > longest[1].weekend)
+	if(weekdayAvg > weekendAvg)
 	{
 		document.getElementById("weekdayOrWeekendLonger").innerText = "weekdays";
 	}
@@ -122,6 +126,6 @@ function sortActMileage(activities)
 	const arr = Array.from(activities.entries());
 
 	//descending order of mileage
-	let sorted = arr.sort((a,b) => b[1].mileage - a[1].mileage);
+	let sorted = arr.sort((a,b) => (b[1].mileage / b[1].frequency) - (a[1].mileage / a[1].frequency));
 	return sorted;
 }

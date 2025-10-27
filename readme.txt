@@ -9,6 +9,10 @@
 
 2. How long, in hours, did it take you to complete this assignment?
    - 2 hrs for 1.1
+   - 1 hr for 1.2
+   - 1 hr for 1.3
+
+   - ~2 hrs for 2.1 
 
 
 3. What online resources did you consult when completing this assignment? (list sites like StackOverflow or specific URLs for tutorials; describe queries to Generative AI or use of AI-based code completion)
@@ -18,7 +22,7 @@
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getDay
-    
+
     https://mathjs.org/docs/reference/functions/format.html
 
     https://www.w3schools.com/js/js_variables.asp
