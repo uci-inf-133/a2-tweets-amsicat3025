@@ -9,15 +9,25 @@ function parseTweets(runkeeper_tweets) {
 		return new Tweet(tweet.text, tweet.created_at);
 	});
 	console.log(tweet_array.length);
-	obtainNumActivities(tweet_array);
+	activities = obtainNumActivities(tweet_array);
+	updateActivitiesPage(activities)
 
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
+	actFreqArray = activityFrequencyArray(activities);
+	console.log(actFreqArray);
 
 	activity_vis_spec = {
 	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+	  "width": 600,
+	  "height": 400, 
 	  "description": "A graph of the number of Tweets containing each type of activity.",
 	  "data": {
-	    "values": tweet_array
+	    "values": actFreqArray
+	  },
+	  "mark": "bar", 
+	  "encoding" : {
+		"x": {"field": "Activity Type"},
+		"y": {"field": "frequency", "type": "quantitative", "title": "Number of Tweets"}
 	  }
 	  //TODO: Add mark and encoding
 	};
@@ -50,15 +60,20 @@ function obtainNumActivities(tweet_array)
 		console.log(activities);
 		let actType = tweet.activityType;
 
+		let day = tweet.time.getDay(); 
 		let isWeekday = true; 
-		if(tweet.time.getDay() == 0 || tweet.time.getDay() == 6)
+
+		if(day == 0 || day == 6)
 		{
 			isWeekday = false;
 		}
 
 		if(!activities.has(actType))
 		{
-			activities.set(actType, {frequency: 1, mileage: tweet.distance, weekday: 0, weekdayMileage: 0, weekend: 0, weekendMileage: 0});
+			activities.set(actType, {frequency: 1, mileage: tweet.distance, 
+									 sunday: 0, monday: 0, tuesday: 0, wednesday: 0, thursday: 0, 
+									 friday: 0, saturday: 0,
+									 weekday: 0, weekdayMileage: 0, weekend: 0, weekendMileage: 0});
 		}
 		else
 		{
@@ -66,6 +81,35 @@ function obtainNumActivities(tweet_array)
 			activities.get(actType).mileage += tweet.distance; 
 		}
 
+		if(day == 0)
+		{
+			activities.get(actType).sunday += 1;
+		}
+		else if(day == 1)
+		{
+			activities.get(actType).monday += 1;
+		}
+		else if(day == 2)
+		{
+			activities.get(actType).tuesday +=1; 
+		}
+		else if(day == 3)
+		{
+			activities.get(actType).wednesday +=1; 
+		}
+		else if(day == 4)
+		{
+			activities.get(actType).thursday +=1; 
+		}
+		else if(day == 5)
+		{
+			activities.get(actType).friday +=1; 
+		}
+		else
+		{
+			activities.get(actType).saturday +=1; 
+		}
+		
 		if(isWeekday)
 		{
 			activities.get(actType).weekdayMileage += tweet.distance;
@@ -78,6 +122,11 @@ function obtainNumActivities(tweet_array)
 		}
 	}
 
+	return activities; 
+}
+
+function updateActivitiesPage(activities)
+{
 	let size = activities.size; 
 
 	document.getElementById("numberActivities").innerText = size; 
@@ -119,6 +168,18 @@ function sortActFrequency(activities)
 	let sorted = arr.sort((a,b) => b[1].frequency - a[1].frequency); 
 
 	return sorted; 
+}
+
+function activityFrequencyArray(activities)
+{
+	let actFreq = new Array(); 
+
+	for(const [key, value] of activities)
+	{
+		actFreq.push({"Activity Type": key, "frequency": value.frequency});
+	}
+
+	return actFreq;
 }
 
 function sortActMileage(activities)

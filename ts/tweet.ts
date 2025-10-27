@@ -102,6 +102,11 @@ class Tweet {
             var tweet:string = this.text.toLowerCase(); //for case matching
             var indexOfRunkeeper = tweet.indexOf("runkeeper");
             tweet = tweet.substring(0, indexOfRunkeeper);
+
+            if(tweet.includes("ski run"))
+            {
+                return "skiing";
+            }
             
             if(tweet.includes("run"))
             {
