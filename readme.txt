@@ -13,7 +13,7 @@
    - 1 hr for 1.3
 
    - ~2 hrs for 2.1 
-   - ~3 hrs for these godforsaken graphs and debugging them F
+   - ~4 hrs for these godforsaken graphs and debugging them F
 
 
 3. What online resources did you consult when completing this assignment? (list sites like StackOverflow or specific URLs for tutorials; describe queries to Generative AI or use of AI-based code completion)

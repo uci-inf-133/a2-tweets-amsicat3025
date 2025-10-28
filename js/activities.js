@@ -89,6 +89,7 @@ function parseTweets(runkeeper_tweets) {
 	//hard-coded
 	document.getElementById("longestActivityType").innerText = "biking";
 	document.getElementById("shortestActivityType").innerText = "walking";
+	document.getElementById("weekdayOrWeekendLonger").innerText = "weekends";
 
 	vegaEmbed('#activityVis', activity_vis_spec, {actions:false});
 	vegaEmbed('#distanceVis', distance_vis_spec, {actions:false});
@@ -218,11 +219,7 @@ function updateActivitiesPage(activities)
 	document.getElementById("secondMost").innerText = secondMost;
 	document.getElementById("thirdMost").innerText = thirdMost;
 
-	/*const mileArray = sortActMileage(activities)
-	const longest = mileArray[0][0];
-	const shortest = mileArray[size-1][0];
-	document.getElementById("longestActivityType").innerText = longest; 
-	document.getElementById("shortestActivityType").innerText = shortest; 
+	const mileArray = sortActMileage(activities);
 
 	//Longest one is done more on weekends or weekdays
 	let weekdayAvg = mileArray[0][1].weekdayMileage / mileArray[0][1].weekday; 
@@ -235,7 +232,7 @@ function updateActivitiesPage(activities)
 	else
 	{
 		document.getElementById("weekdayOrWeekendLonger").innerText = "weekends";
-	}*/
+	}
 
 }
 

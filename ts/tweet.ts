@@ -133,7 +133,17 @@ class Tweet {
                 return "hiking";
             }
 
-            return "workout";
+            if(tweet.includes("workout"))
+            {
+                return "workout"; 
+            }
+
+            if(tweet.includes("activity"))
+            {
+                return "activity"; 
+            }
+
+            return "unknown";
         }
     }
 
@@ -194,7 +204,7 @@ class Tweet {
             {
                 distance = distance / 1.069;
             }
-            console.log(distance);
+            //console.log(distance);
             return distance; 
         }
         
