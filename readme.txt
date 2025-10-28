@@ -40,6 +40,7 @@
     https://www.geeksforgeeks.org/javascript/how-to-iterate-over-map-elements-in-javascript/
     https://www.w3schools.com/jsref/jsref_slice_array.asp
     https://www.w3schools.com/jsref/prop_style_visibility.asp
+    https://www.w3schools.com/jsref/jsref_tolowercase.asp
 
     https://www.geeksforgeeks.org/javascript/how-to-sort-a-map-in-javascript/#approach-1-using-mapentries-and-sort-method
     https://www.geeksforgeeks.org/javascript/sort-an-object-array-by-date-in-javascript/
