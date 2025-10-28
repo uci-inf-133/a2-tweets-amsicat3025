@@ -7,6 +7,12 @@ function parseTweets(runkeeper_tweets)
 	}
 
 	//TODO: Filter to just the written tweets
+	//Okay well how do I do that...
+	tweet_array = runkeeper_tweets.map(function(tweet) {
+		return new Tweet(tweet.text, tweet.created_at);
+	});
+
+	tweet_array = tweet_array.filter((tweet) => tweet.written); 
 }
 
 //Didn't I do this in 122b...?

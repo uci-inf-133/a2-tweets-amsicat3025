@@ -26,6 +26,7 @@
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/in
     https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement#:~:text=The%20insertAdjacentElement()%20method%20of,element%20it%20is%20invoked%20upon.
     https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener 
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 
     https://mathjs.org/docs/reference/functions/format.html
 

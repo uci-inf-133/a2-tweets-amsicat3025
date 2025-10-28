@@ -133,9 +133,39 @@ class Tweet {
                 return "hiking";
             }
 
-            if(tweet.includes("workout"))
+            if(tweet.includes("elliptical"))
             {
-                return "workout"; 
+                return "elliptical"; 
+            }
+
+            if(tweet.includes("spinning"))
+            {
+                return "spinning"; 
+            }
+
+            if(tweet.includes("strong"))
+            {
+                return "strong"; 
+            }
+
+            if(tweet.includes("stairmaster"))
+            {
+                return "stairmaster"; 
+            }
+
+            if(tweet.includes("bootcamp"))
+            {
+                return "bootcamp"; 
+            }
+
+            if(tweet.includes("crossfit"))
+            {
+                return "crossfit"; 
+            }
+
+            if(tweet.includes("snowboard"))
+            {
+                return "snowboard"; 
             }
 
             if(tweet.includes("activity"))
@@ -210,8 +240,36 @@ class Tweet {
         
     }
 
-    getHTMLTableRow(rowNumber:number):string {
+    getTweetLink():string
+    {
+        let tweet = this.text;
+        let index = tweet.indexOf("https://"); 
+        let runIndex = tweet.indexOf("#Runkeeper");
+        return tweet.substring(index, runIndex).trim();
+    }
+
+    generateTweetString():string
+    {
+        let tweet = this.text;
+        let index = tweet.indexOf("https://");
+        return tweet.substring(0, index).trim(); 
+    }
+
+    getHTMLTableRow(rowNumber:number):string 
+    {
         //TODO: return a table row which summarizes the tweet with a clickable link to the RunKeeper activity
-        return "<tr></tr>";
+        if(!this.written)
+            return "";
+
+        let tweetLink = this.getTweetLink(); 
+
+        let rowHTML = ""; 
+        rowHTML += "<tr>";
+        rowHTML += "<th>" + rowNumber + "<th>";
+        rowHTML += "<th>" + this.activityType + "<th>";
+        rowHTML += "<th>" + this.generateTweetString() + '<a href=' + tweetLink + '>' + " #RunKeeper" + "<th>";
+        rowHTML += "<tr>"; 
+
+        return rowHTML;
     }
 }
