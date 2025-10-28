@@ -238,17 +238,17 @@ function updateActivitiesPage(activities)
 
 function sortActFrequency(activities)
 {
-	let arr = Array.from(activities.entries());
+	var arr = Array.from(activities.entries());
 
 	//descending order of frequency
-	let sorted = arr.sort((a,b) => b[1].frequency - a[1].frequency); 
+	var sorted = arr.sort((a,b) => b[1].frequency - a[1].frequency); 
 
 	return sorted; 
 }
 
 function activityFrequencyArray(activities)
 {
-	let actFreq = new Array(); 
+	var actFreq = new Array(); 
 
 	for(const [key, value] of activities)
 	{
@@ -260,10 +260,10 @@ function activityFrequencyArray(activities)
 
 function mostFrequentDayMeans(activities, tweet_array)
 {
-	let arr = sortActFrequency(activities); 
+	var arr = sortActFrequency(activities); 
 	//console.log(arr);
 
-	let mostFreq = new Array();
+	var mostFreq = new Array();
 
 	for(i = 0; i < 3; i++)
 	{
@@ -272,11 +272,11 @@ function mostFrequentDayMeans(activities, tweet_array)
 
 	const len = tweet_array.length; 
 
-	let distanceMeans = new Array(); 
+	var distanceMeans = new Array(); 
 
 	for(let j = 0; j < len; ++j)
 	{
-		let tweet = tweet_array[j];
+		var tweet = tweet_array[j];
 
 		if(!mostFreq.includes(tweet.activityType) || tweet.source != "completed_event")
 		{
@@ -290,7 +290,7 @@ function mostFrequentDayMeans(activities, tweet_array)
 			continue;
 		}
 
-		let day = tweet.time.getDay(); 
+		var day = tweet.time.getDay(); 
 
 		if(day == 0)
 		{
@@ -330,6 +330,6 @@ function sortActMileage(activities)
 	const arr = Array.from(activities.entries());
 
 	//descending order of mileage
-	let sorted = arr.sort((a,b) => (b[1].mileage / b[1].frequency) - (a[1].mileage / a[1].frequency));
+	var sorted = arr.sort((a,b) => (b[1].mileage / b[1].frequency) - (a[1].mileage / a[1].frequency));
 	return sorted;
 }

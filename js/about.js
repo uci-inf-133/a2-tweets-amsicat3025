@@ -27,7 +27,7 @@ function updateTimes(tweet_array)
 {
 	//Sorts array based on date 
 
-	let tweets = tweet_array; //idk if we need this sorted later
+	var tweets = tweet_array; //idk if we need this sorted later
 	tweets.sort((a,b) => a.time - b.time); 
 
 	const format = 
@@ -38,8 +38,8 @@ function updateTimes(tweet_array)
 		day: "numeric", 
 	}; 
 
-	let earliest = tweets[0].time.toLocaleDateString(undefined, format);
-	let latest = tweets[tweet_array.length - 1].time.toLocaleDateString(undefined, format);
+	var earliest = tweets[0].time.toLocaleDateString(undefined, format);
+	var latest = tweets[tweet_array.length - 1].time.toLocaleDateString(undefined, format);
 
 	document.getElementById('firstDate').innerHTML = earliest;
 	document.getElementById('lastDate').innerHTML = latest;
@@ -50,17 +50,17 @@ function updateTimes(tweet_array)
 
 function calculateCategoryType(tweet_array)
 {
-	let live_events = 0;
-	let achievement = 0; 
-	let completed_event = 0;
-	let miscellaneous = 0; 
+	var live_events = 0;
+	var achievement = 0; 
+	var completed_event = 0;
+	var miscellaneous = 0; 
 
-	let len = tweet_array.length; 
+	var len = tweet_array.length; 
 
 	for(let i = 0; i < len; i++)
 	{
-		let cur_tweet = tweet_array[i]; 
-		let source = cur_tweet.source; 
+		var cur_tweet = tweet_array[i]; 
+		var source = cur_tweet.source; 
 		if(source == "live_event")
 		{
 			live_events += 1; 
@@ -80,9 +80,9 @@ function calculateCategoryType(tweet_array)
 	}
 
 	//Important note to self: Figure out if there's a better way to deal with changing the text here
-	let pctComplete = math.format((completed_event / len), { notation: "fixed", precision: 2}); 
+	var pctComplete = math.format((completed_event / len), { notation: "fixed", precision: 2}); 
 	const completedEvents = document.getElementsByClassName('completedEvents');
-	let comLen = completedEvents.length; 
+	var comLen = completedEvents.length; 
 	for(let i = 0; i < comLen; i++)
 	{
 		completedEvents[i].innerText = completed_event;
@@ -90,15 +90,15 @@ function calculateCategoryType(tweet_array)
 	document.getElementsByClassName("completedEvents")[0].innerText = completed_event; 
 	document.getElementsByClassName("completedEventsPct")[0].innerText = pctComplete + "%"; 
 
-	let pctLive = math.format((live_events / len), { notation: "fixed", precision: 2}); 
+	var pctLive = math.format((live_events / len), { notation: "fixed", precision: 2}); 
 	document.getElementsByClassName("liveEvents")[0].innerText = live_events; 
 	document.getElementsByClassName("liveEventsPct")[0].innerText = pctLive + "%";
 
-	let pctAch = math.format((achievement / len), { notation: "fixed", precision: 2}); 
+	var pctAch = math.format((achievement / len), { notation: "fixed", precision: 2}); 
 	document.getElementsByClassName("achievements")[0].innerText = achievement; 
 	document.getElementsByClassName("achievementsPct")[0].innerText = pctAch + "%";
 
-	let pctMisc = math.format((miscellaneous / len), { notation: "fixed", precision: 2}); 
+	var pctMisc = math.format((miscellaneous / len), { notation: "fixed", precision: 2}); 
 	document.getElementsByClassName("miscellaneous")[0].innerText = achievement; 
 	document.getElementsByClassName("miscellaneousPct")[0].innerText = pctMisc + "%";
 
@@ -106,8 +106,8 @@ function calculateCategoryType(tweet_array)
 
 function obtainWritten(tweet_array)
 {
-	let len = tweet_array.length;
-	let numWritten = 0; 
+	var len = tweet_array.length;
+	var numWritten = 0; 
 
 	for(let i = 0; i < len; i++)
 	{
@@ -117,7 +117,7 @@ function obtainWritten(tweet_array)
 		}
 	}
 
-	let pctWritten = math.format((numWritten / len),  { notation: "fixed", precision: 2});
+	var pctWritten = math.format((numWritten / len),  { notation: "fixed", precision: 2});
 	document.getElementsByClassName("written")[0].innerText = numWritten; 
 	document.getElementsByClassName("writtenPct")[0].innerText = pctWritten + "%";
 }
