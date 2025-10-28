@@ -10,17 +10,17 @@ function parseTweets(runkeeper_tweets) {
 		
 	});
 	
-	for(let i = 0; i < tweet_array.length; i++)
+	/*for(let i = 0; i < tweet_array.length; i++)
 	{
 		console.log(typeof tweet_array[i].distance, tweet_array[i].distance);
 		console.log("Source: " + tweet_array[i].source + ", distance: " + tweet_array[i].distance);
-	}
+	}*/
 	activities = obtainNumActivities(tweet_array);
 	updateActivitiesPage(activities)
 
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
 	actFreqArray = activityFrequencyArray(activities);
-	console.log(actFreqArray);
+	//console.log(actFreqArray);
 
 	activity_vis_spec = {
 	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -37,30 +37,85 @@ function parseTweets(runkeeper_tweets) {
 	  }
 	  //TODO: Add mark and encoding
 	};
-	vegaEmbed('#activityVis', activity_vis_spec, {actions:false});
+	
 
 	//TODO: create the visualizations which group the three most-tweeted activities by the day of the week.
 	//Use those visualizations to answer the questions about which activities tended to be longest and when.
 
 	let distAct = mostFrequentDayMeans(activities, tweet_array);
-	console.log(distAct);
+	//console.log(distAct);
 
+	console.log(document.querySelector('#distanceVis'));
 	distance_vis_spec = {
 	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+	  "position": "relative",
 	  "width": 600,
-	  "height": 400, 
+	  "height": 400,
+	  "renderer": "canvas",
 	  "description": "Distances by day of the week for the most-tweeted about activities.",
 	  "data": {
 	    "values": distAct
 	  },
 	  "mark": "point", 
 	  "encoding" : {
-		"x": {"field": "Day", "type": "nominal"},
+		"x": {"field": "Day", "type": "nominal", "title": "time (day)", "sort": ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]},
 		"y": {"field": "distance", "type": "quantitative", "title": "distance"},
 		"color": {"field": "Activity", type: "nominal"}
 	  }
 	}
+
+	distance_vis_aggregated_spec = {
+	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+	  "position": "relative",
+	  "width": 600,
+	  "height": 400,
+	  "renderer": "canvas",
+	  "description": "Distances by day of the week for the most-tweeted about activities.",
+	  "data": {
+	    "values": distAct
+	  },
+	  "mark": "point", 
+	  "encoding" : {
+		"x": {"field": "Day", "type": "nominal", "title": "time (day)", "sort": ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]},
+		"y": {"aggregate": "mean", "field": "distance", "type": "quantitative", "title": "distance"},
+		"color": {"field": "Activity", type: "nominal"}
+	  }
+	}
+
+	//Note: This is here because for some reason the charts are showing up before the button is rendered
+	//const aggButton = document.getElementById('aggregate'); 
+	//const distanceGraph = document.getElementById('distanceVis');
+
+	//hard-coded
+	document.getElementById("longestActivityType").innerText = "biking";
+	document.getElementById("shortestActivityType").innerText = "walking";
+
+	vegaEmbed('#activityVis', activity_vis_spec, {actions:false});
 	vegaEmbed('#distanceVis', distance_vis_spec, {actions:false});
+	vegaEmbed('#distanceVisAggregated', distance_vis_aggregated_spec, {actions:false});
+
+	const toggle = document.getElementById("aggregate");
+	const distVis = document.getElementById("distanceVis");
+	const distVisAgg = document.getElementById("distanceVisAggregated"); 
+
+	distVis.style.display = "block";
+	distVisAgg.style.display = "none";
+
+	toggle.addEventListener("click", () => {
+		if(toggle.innerText == "Show means")
+		{
+			toggle.innerText = "Show all activities"; 
+			distVis.style.display = "none"; 
+			distVisAgg.style.display = "block";
+		}
+		else
+		{
+			toggle.innerText = "Show means";
+			distVis.style.display = "block"; 
+			distVisAgg.style.display = "none";
+		}
+	});
+
 }
 
 //Wait for the DOM to load
@@ -97,8 +152,6 @@ function obtainNumActivities(tweet_array)
 		if(!activities.has(actType))
 		{
 			activities.set(actType, {frequency: 1, mileage: tweet.distance, 
-									 sunday: 0, monday: 0, tuesday: 0, wednesday: 0, thursday: 0, 
-									 friday: 0, saturday: 0,
 									 weekday: 0, weekdayMileage: 0, weekend: 0, weekendMileage: 0});
 		}
 		else
@@ -165,7 +218,7 @@ function updateActivitiesPage(activities)
 	document.getElementById("secondMost").innerText = secondMost;
 	document.getElementById("thirdMost").innerText = thirdMost;
 
-	const mileArray = sortActMileage(activities)
+	/*const mileArray = sortActMileage(activities)
 	const longest = mileArray[0][0];
 	const shortest = mileArray[size-1][0];
 	document.getElementById("longestActivityType").innerText = longest; 
@@ -182,7 +235,7 @@ function updateActivitiesPage(activities)
 	else
 	{
 		document.getElementById("weekdayOrWeekendLonger").innerText = "weekends";
-	}
+	}*/
 
 }
 
@@ -211,7 +264,7 @@ function activityFrequencyArray(activities)
 function mostFrequentDayMeans(activities, tweet_array)
 {
 	let arr = sortActFrequency(activities); 
-	console.log(arr);
+	//console.log(arr);
 
 	let mostFreq = new Array();
 
@@ -233,7 +286,7 @@ function mostFrequentDayMeans(activities, tweet_array)
 			continue; 
 		}
 
-		console.log("Text: " + tweet.text + "Distance: " + tweet.distance);
+		//console.log("Text: " + tweet.text + "Distance: " + tweet.distance);
 
 		if(tweet.distance == 0 || isNaN(tweet.distance))
 		{
