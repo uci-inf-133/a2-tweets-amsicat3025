@@ -12,9 +12,27 @@ class Tweet {
     {
         var tweet:string = this.text.toLowerCase(); //for case matching
 
+        //For completed_events
+        if(tweet.startsWith("just completed") || tweet.startsWith("just posted"))
+        {
+            return "completed_event"; 
+        }
+
+        //For live_events
+        if(tweet.startsWith("watch live") || tweet.includes("now"))
+        {
+            return "live_event"; 
+        }
+
+        //For achievements
+        if(tweet.startsWith("achieved") || tweet.includes("record"))
+        {
+            return "achievement"; 
+        }
+
         //On a side note: Go update this later so it doesn't take up as much space
         //For live_events:
-        if(tweet.startsWith("watch") || tweet.includes("watch") || tweet.endsWith("watch"))
+        /*if(tweet.startsWith("watch") || tweet.includes("watch") || tweet.endsWith("watch"))
         {
             return "live_event"; 
         }
@@ -54,7 +72,7 @@ class Tweet {
         if(tweet.startsWith("posted") || tweet.includes("posted") || tweet.endsWith("posted"))
         {
             return "completed_event"; 
-        }
+        }*/
 
        
         //TODO: identify whether the source is a live event, an achievement, a completed event, or miscellaneous.
@@ -66,13 +84,40 @@ class Tweet {
     {
         //TODO: identify whether the tweet is written
         //the parsing consists basically of "Just completed blah blah" exclude everything after @ RunKeeper
-        var httpsIndex = this.text.indexOf("https://"); 
+        /*let activity = this.activityType; 
+       
+        /*var httpsIndex = this.text.indexOf("https://"); 
         var tweet = this.text.substring(0, httpsIndex); 
         var userIndex = tweet.indexOf(" - "); 
 
         if(userIndex != -1)
         {
             return true;
+        }
+        return false;*/
+
+        let tweet = this.text;
+        let httpsIndex = tweet.indexOf("https://"); //in the event there is no https for some reason...
+        if(httpsIndex == -1)
+        {
+            return false; 
+        }
+
+        if(tweet.startsWith("Just completed") || tweet.startsWith("Just posted") || tweet.startsWith("Watch live"))
+        {
+            let dash = tweet.indexOf(" - ");
+            if(dash == -1)
+            {
+                return false; 
+            }
+            else
+            {
+                if(dash + 3 == httpsIndex)
+                {
+                    return false;
+                }
+                return true; 
+            }
         }
         return false;
     }
@@ -85,9 +130,30 @@ class Tweet {
         }
         else
         {
-            var httpsIndex:number = this.text.indexOf("https://")
-            var dash:number = this.text.indexOf(" - ");
-            return this.text.substring(dash+1, httpsIndex);
+            let tweet = this.text; 
+            let httpsIndex = tweet.indexOf("https://");
+            if(httpsIndex == -1)
+            {
+                return ""; 
+            }
+            
+            if(tweet.startsWith("Just completed") || tweet.startsWith("Just posted") || tweet.startsWith("Watch live"))
+            {
+                let dash = tweet.indexOf(" - ");
+                if(dash == -1)
+                {
+                    return ""; 
+                }
+                else
+                {
+                    if(dash + 3 == httpsIndex)
+                    {
+                        return "";
+                    }
+                    return tweet.substring(dash + 3, httpsIndex); 
+                }
+            }
+            return ""; 
         }
     }
 
@@ -102,8 +168,13 @@ class Tweet {
             var tweet:string = this.text.toLowerCase(); //for case matching
             var indexOfRunkeeper = tweet.indexOf("runkeeper");
             tweet = tweet.substring(0, indexOfRunkeeper);
-
+            
             if(tweet.includes("ski run"))
+            {
+                return "ski running";
+            }
+
+            if(tweet.includes("ski"))
             {
                 return "skiing";
             }
@@ -111,6 +182,11 @@ class Tweet {
             if(tweet.includes("run"))
             {
                 return "running"; 
+            }
+
+            if(tweet.includes("moutain bike"))
+            {
+                return "mountain biking";
             }
 
             if(tweet.includes("bike"))
@@ -245,31 +321,75 @@ class Tweet {
         let tweet = this.text;
         let index = tweet.indexOf("https://"); 
         let runIndex = tweet.indexOf("#Runkeeper");
-        return tweet.substring(index, runIndex).trim();
+        let run = "#Runkeeper";
+        
+
+        if(runIndex == -1)
+        {
+            return tweet.substring(index).trim();
+        }
+        else
+        {
+            if(runIndex < index)
+            {
+                let len = run.length; 
+                return tweet.substring(runIndex + len);
+            }
+            return tweet.substring(index, runIndex).trim();
+        }
     }
 
     generateTweetString():string
     {
         let tweet = this.text;
         let index = tweet.indexOf("https://");
+        if(index == -1)
+        {
+            return "";
+        }
         return tweet.substring(0, index).trim(); 
+    }
+
+    //For the hashtags...
+    generateAfterURL():string
+    {
+        let tweet = this.text;
+        let index = tweet.indexOf("https://");
+        let urlPost = tweet.substring(index); 
+
+        let urlEnd = urlPost.indexOf(" ");
+        if(urlEnd == -1)
+        {
+            return ""; 
+        }
+        else
+        {
+            return urlPost.substring(urlEnd+1).trim();
+        }
     }
 
     getHTMLTableRow(rowNumber:number):string 
     {
         //TODO: return a table row which summarizes the tweet with a clickable link to the RunKeeper activity
-        if(!this.written)
-            return "";
-
         let tweetLink = this.getTweetLink(); 
-
         let rowHTML = ""; 
+
         rowHTML += "<tr>";
         rowHTML += "<th>" + rowNumber + "</th>";
         rowHTML += "<th>" + this.activityType + "</th>";
-        rowHTML += "<th>" + this.generateTweetString() + 
-                   '<a href=' + tweetLink + + '>' + '</a>' + 
-                   " #RunKeeper" + "</th>";
+        rowHTML += "<th>" + this.generateTweetString();
+
+        //In the event we're missing an https:// for some reason
+        if(tweetLink != "")
+        {
+            rowHTML += ' <a href="' + tweetLink + '">' + tweetLink + '</a> ';
+            rowHTML += this.generateAfterURL() + "</th>";
+        }
+        else
+        {
+            rowHTML += "</th>"
+        }
+
         rowHTML += "</tr>"; 
 
         return rowHTML;

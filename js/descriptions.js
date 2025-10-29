@@ -38,7 +38,7 @@ function updateTable(query)
 {
 	//Filter the tweets and then update the table appropriately
 	document.getElementById("searchText").innerText = query;
-	filtered_tweets = tweet_array.filter((tweet) => tweet.writtenText.includes(query));
+	filtered_tweets = tweet_array.filter((tweet) => tweet.writtenText.toLowerCase().includes(query));
 	let len = filtered_tweets.length; 
 	document.getElementById("searchCount").innerText = filtered_tweets.length; 
 

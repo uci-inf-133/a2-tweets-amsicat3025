@@ -16,8 +16,9 @@
    - ~4 hrs for these godforsaken graphs and debugging them F
 
    ~ 1 hr for 3.1
-   - 1 hr (so far) for 3.2
+   - 2 hrs (so far) for 3.2
 
+   - 1 hr for debugging
 
 3. What online resources did you consult when completing this assignment? (list sites like StackOverflow or specific URLs for tutorials; describe queries to Generative AI or use of AI-based code completion)
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
