@@ -95,7 +95,7 @@ class Tweet {
     {
         if (this.source != "completed_event") 
         {
-            return "";
+            return "unknown";
         }
         else
         {
@@ -265,10 +265,12 @@ class Tweet {
 
         let rowHTML = ""; 
         rowHTML += "<tr>";
-        rowHTML += "<th>" + rowNumber + "<th>";
-        rowHTML += "<th>" + this.activityType + "<th>";
-        rowHTML += "<th>" + this.generateTweetString() + '<a href=' + tweetLink + '>' + " #RunKeeper" + "<th>";
-        rowHTML += "<tr>"; 
+        rowHTML += "<th>" + rowNumber + "</th>";
+        rowHTML += "<th>" + this.activityType + "</th>";
+        rowHTML += "<th>" + this.generateTweetString() + 
+                   '<a href=' + tweetLink + + '>' + '</a>' + 
+                   " #RunKeeper" + "</th>";
+        rowHTML += "</tr>"; 
 
         return rowHTML;
     }

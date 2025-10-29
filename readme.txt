@@ -15,6 +15,9 @@
    - ~2 hrs for 2.1 
    - ~4 hrs for these godforsaken graphs and debugging them F
 
+   ~ 1 hr for 3.1
+   - 1 hr (so far) for 3.2
+
 
 3. What online resources did you consult when completing this assignment? (list sites like StackOverflow or specific URLs for tutorials; describe queries to Generative AI or use of AI-based code completion)
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
@@ -27,6 +30,7 @@
     https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement#:~:text=The%20insertAdjacentElement()%20method%20of,element%20it%20is%20invoked%20upon.
     https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener 
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+    https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
 
     https://mathjs.org/docs/reference/functions/format.html
 
@@ -42,6 +46,7 @@
     https://www.w3schools.com/jsref/jsref_slice_array.asp
     https://www.w3schools.com/jsref/prop_style_visibility.asp
     https://www.w3schools.com/jsref/jsref_tolowercase.asp
+    https://www.w3schools.com/jsref/met_node_insertadjacenthtml.asp
 
     https://www.geeksforgeeks.org/javascript/how-to-sort-a-map-in-javascript/#approach-1-using-mapentries-and-sort-method
     https://www.geeksforgeeks.org/javascript/sort-an-object-array-by-date-in-javascript/
@@ -49,6 +54,7 @@
     https://stackoverflow.com/questions/26782213/phps-strstr-equivalent-for-javascript 
     https://stackoverflow.com/questions/26794275/how-do-i-ignore-case-when-using-startswith-and-endswith-in-java
     https://stackoverflow.com/questions/65114988/using-in-keyword-with-maps-in-js
+    https://stackoverflow.com/questions/10318294/js-dom-equivalent-for-jquery-append
 
     https://vega.github.io/vega-lite/examples/bar_size_responsive.html 
     https://vega.github.io/vega-lite/examples/point_2d.html
