@@ -80,7 +80,7 @@ function calculateCategoryType(tweet_array)
 	}
 
 	//Important note to self: Figure out if there's a better way to deal with changing the text here
-	var pctComplete = math.format((completed_event / len), { notation: "fixed", precision: 2}); 
+	var pctComplete = math.format(((completed_event / len)*100), { notation: "fixed", precision: 2}); 
 	const completedEvents = document.getElementsByClassName('completedEvents');
 	var comLen = completedEvents.length; 
 	for(let i = 0; i < comLen; i++)
@@ -90,15 +90,15 @@ function calculateCategoryType(tweet_array)
 	document.getElementsByClassName("completedEvents")[0].innerText = completed_event; 
 	document.getElementsByClassName("completedEventsPct")[0].innerText = pctComplete + "%"; 
 
-	var pctLive = math.format((live_events / len), { notation: "fixed", precision: 2}); 
+	var pctLive = math.format(((live_events / len) * 100), { notation: "fixed", precision: 2}); 
 	document.getElementsByClassName("liveEvents")[0].innerText = live_events; 
 	document.getElementsByClassName("liveEventsPct")[0].innerText = pctLive + "%";
 
-	var pctAch = math.format((achievement / len), { notation: "fixed", precision: 2}); 
+	var pctAch = math.format(((achievement / len)*100), { notation: "fixed", precision: 2}); 
 	document.getElementsByClassName("achievements")[0].innerText = achievement; 
 	document.getElementsByClassName("achievementsPct")[0].innerText = pctAch + "%";
 
-	var pctMisc = math.format((miscellaneous / len), { notation: "fixed", precision: 2}); 
+	var pctMisc = math.format(((miscellaneous / len)*100), { notation: "fixed", precision: 2}); 
 	document.getElementsByClassName("miscellaneous")[0].innerText = achievement; 
 	document.getElementsByClassName("miscellaneousPct")[0].innerText = pctMisc + "%";
 
@@ -117,7 +117,7 @@ function obtainWritten(tweet_array)
 		}
 	}
 
-	var pctWritten = math.format((numWritten / len),  { notation: "fixed", precision: 2});
+	var pctWritten = math.format(((numWritten / len) * 100),  { notation: "fixed", precision: 2});
 	document.getElementsByClassName("written")[0].innerText = numWritten; 
 	document.getElementsByClassName("writtenPct")[0].innerText = pctWritten + "%";
 }
