@@ -29,7 +29,6 @@ function addEventHandlerForSearch()
 	textFilter.addEventListener("input", (text) => {
 		query = text.target.value.toLowerCase();
 		console.log("User put in: " + query);
-		document.getElementById("searchText").innerText = query;
 
 		updateTable(query); 
 	});
@@ -38,22 +37,19 @@ function addEventHandlerForSearch()
 function updateTable(query)
 {
 	//Filter the tweets and then update the table appropriately
+	document.getElementById("searchText").innerText = query;
 	filtered_tweets = tweet_array.filter((tweet) => tweet.writtenText.includes(query));
 	let len = filtered_tweets.length; 
 	document.getElementById("searchCount").innerText = filtered_tweets.length; 
 
-	if(query == "")
-	{
-		return;
-	}
-
 	let table = document.getElementById("tweetTable");
-	//tableBody.innerHTML = "";
+	table.innerHTML = "";
+	filtered_tweets = filtered_tweets.filter((tweet) => tweet.written);
 
 	for(let i = 0; i < len; i++)
 	{
 		tweet = filtered_tweets[i]; 
-		let tableHTML = tweet.getHTMLTableRow(i); 
+		let tableHTML = tweet.getHTMLTableRow(i+1); 
 		table.insertAdjacentHTML('beforeend', tableHTML);
 	}
 }

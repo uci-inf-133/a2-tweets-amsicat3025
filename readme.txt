@@ -31,6 +31,7 @@
     https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener 
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
     https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
 
     https://mathjs.org/docs/reference/functions/format.html
 
