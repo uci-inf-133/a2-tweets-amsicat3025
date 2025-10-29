@@ -66,7 +66,8 @@
     https://vega.github.io/vega-lite/docs/aggregate.html
     https://vega.github.io/vega-lite/docs/sort.html
 
-    My old CS 122b HW (we added rows to an HTML table dynamically, though it was based off an array of SQL query results)
+    My old CS 122b HW (we added rows to an HTML table dynamically, though we used jquery and 
+    it was based off an array of SQL query results)
 
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
@@ -74,4 +75,5 @@
 
 
 5. Is there anything special we need to know in order to run your code?
+   No
 
