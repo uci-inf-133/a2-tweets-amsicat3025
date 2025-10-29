@@ -18,7 +18,7 @@
    ~ 1 hr for 3.1
    - 2 hrs (so far) for 3.2
 
-   - 1 hr for debugging
+   - 2 hrs for debugging
 
 3. What online resources did you consult when completing this assignment? (list sites like StackOverflow or specific URLs for tutorials; describe queries to Generative AI or use of AI-based code completion)
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
@@ -63,6 +63,8 @@
     https://vega.github.io/vega-lite-v1/docs/encoding.html
     https://vega.github.io/vega-lite/docs/aggregate.html
     https://vega.github.io/vega-lite/docs/sort.html
+
+    My old CS 122b HW (we added rows to an HTML table dynamically, though it was based off an array of SQL query results)
 
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?

@@ -152,53 +152,12 @@ function obtainNumActivities(tweet_array)
 
 		if(!activities.has(actType))
 		{
-			activities.set(actType, {frequency: 1, mileage: tweet.distance, 
-									 weekday: 0, weekdayMileage: 0, weekend: 0, weekendMileage: 0});
+			activities.set(actType, {frequency: 1, mileage: tweet.distance});
 		}
 		else
 		{
 			activities.get(actType).frequency += 1; 
 			activities.get(actType).mileage += tweet.distance; 
-		}
-
-		if(day == 0)
-		{
-			activities.get(actType).sunday += tweet.distance;
-		}
-		else if(day == 1)
-		{
-			activities.get(actType).monday += tweet.distance;
-		}
-		else if(day == 2)
-		{
-			activities.get(actType).tuesday += tweet.distance; 
-		}
-		else if(day == 3)
-		{
-			activities.get(actType).wednesday += tweet.distance; 
-		}
-		else if(day == 4)
-		{
-			activities.get(actType).thursday += tweet.distance; 
-		}
-		else if(day == 5)
-		{
-			activities.get(actType).friday += tweet.distance; 
-		}
-		else
-		{
-			activities.get(actType).saturday += tweet.distance; 
-		}
-		
-		if(isWeekday)
-		{
-			activities.get(actType).weekdayMileage += tweet.distance;
-			activities.get(actType).weekday += 1; 
-		}
-		else
-		{
-			activities.get(actType).weekendMileage += tweet.distance;
-			activities.get(actType).weekend += 1; 
 		}
 	}
 
