@@ -1,11 +1,11 @@
---Readme document for *YOUR NAME*, *YOUR_EMAIL@uci.edu*--
+--Readme document for Amelie Sicat, asicat@uci.edu--
 
 1. How many assignment points do you believe you completed (replace the *'s with your numbers)?
 
-*/10
-- */3 Summarizing tweets
-- */4 Identifying the most popular activities
-- */3 Adding a text earch interface
+10/10
+- 3/3 Summarizing tweets
+- 4/4 Identifying the most popular activities
+- 3/3 Adding a text earch interface
 
 2. How long, in hours, did it take you to complete this assignment?
    - 2 hrs for 1.1
@@ -13,12 +13,14 @@
    - 1 hr for 1.3
 
    - ~2 hrs for 2.1 
-   - ~4 hrs for these godforsaken graphs and debugging them F
+   - ~4 hrs for 2.2 (graphs)
 
    ~ 1 hr for 3.1
    - 2 hrs (so far) for 3.2
 
-   - 2 hrs for debugging
+   - 3 hrs for debugging
+
+   So in total, ~11 hours.
 
 3. What online resources did you consult when completing this assignment? (list sites like StackOverflow or specific URLs for tutorials; describe queries to Generative AI or use of AI-based code completion)
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
@@ -68,7 +70,7 @@
 
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
-
+   I consulted with Isabella Phong Nguyen to check our answers for Part 1 and Part 2 against each other.
 
 
 5. Is there anything special we need to know in order to run your code?

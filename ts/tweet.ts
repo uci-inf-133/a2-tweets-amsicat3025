@@ -169,6 +169,16 @@ class Tweet {
             var indexOfRunkeeper = tweet.indexOf("runkeeper");
             tweet = tweet.substring(0, indexOfRunkeeper);
             
+            if(tweet.includes("cardio drumming"))
+            {
+                return "cardio";
+            }
+
+            if(tweet.includes("pilates"))
+            {
+                return "pilates";
+            }
+            
             if(tweet.includes("ski run"))
             {
                 return "ski running";
@@ -242,6 +252,11 @@ class Tweet {
             if(tweet.includes("snowboard"))
             {
                 return "snowboard"; 
+            }
+
+            if(tweet.includes("yoga"))
+            {
+                return "yoga";
             }
 
             if(tweet.includes("activity"))
