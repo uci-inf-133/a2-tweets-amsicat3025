@@ -69,6 +69,13 @@
     My old CS 122b HW (we added rows to an HTML table dynamically, though we used jquery and 
     it was based off an array of SQL query results)
 
+    ChatGPT Queries for Debugging:
+    Q: Why is my Vega-Lite chart not showing up/showing up at the wrong time?
+    A: Because you invoked it at a specific part. 
+
+    Q: Why is my distance ending up weird? I've tested it and the formula seems right.
+    A: It might end up as NaN sometimes, so you should check for it.
+
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
    I consulted with Isabella Phong Nguyen to check our answers for Part 1 and Part 2 against each other.
